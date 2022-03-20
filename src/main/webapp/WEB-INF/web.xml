@@ -7,8 +7,17 @@
         <servlet-name>hh</servlet-name>
         <servlet-class>com.zengpengfei.week2.demo.HelloWorldServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LifeCycleServlet</servlet-name>
+        <servlet-class>com.zengpengfei.week3.demo.LifeCycleServlet</servlet-class>
+    </servlet>
 <servlet-mapping>
     <servlet-name>hh</servlet-name>
     <url-pattern>/hello</url-pattern>
 </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LifeCycleServlet</servlet-name>
+        <url-pattern>/Life</url-pattern>
+
+    </servlet-mapping>
 </web-app>
