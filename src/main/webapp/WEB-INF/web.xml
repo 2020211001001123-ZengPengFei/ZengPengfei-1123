@@ -22,15 +22,15 @@
 
 
 
-    <servlet>
+   <!-- <servlet>
         <servlet-name>hh</servlet-name>
         <servlet-class>com.zengpengfei.week2.demo.HelloWorldServlet</servlet-class>
     </servlet>
-<!--    <servlet>-->
-<!--        <servlet-name>LifeCycleServlet</servlet-name>-->
-<!--        <servlet-class>com.zengpengfei.week3.demo.LifeCycleServlet</servlet-class>-->
-<!--    </servlet>-->
-    <!--<servlet>
+    <servlet>
+        <servlet-name>LifeCycleServlet</servlet-name>
+        <servlet-class>com.zengpengfei.week3.demo.LifeCycleServlet</servlet-class>
+    </servlet>-->
+    <servlet>
         <servlet-name>JDBCDemoServlet</servlet-name>
         <servlet-class>com.zengpengfei.week4.JDBCDemoServlet</servlet-class>
         <init-param>
@@ -50,7 +50,7 @@
             <param-value>admin123456789</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
-    </servlet>-->
+    </servlet>
     <servlet-mapping>
     <servlet-name>hh</servlet-name>
     <url-pattern>/hello</url-pattern>
@@ -59,8 +59,11 @@
 <!--        <servlet-name>LifeCycleServlet</servlet-name>-->
 <!--        <url-pattern>/Life</url-pattern>-->
 <!--    </servlet-mapping>-->
-    <!--<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>JDBCDemoServlet</servlet-name>
         <url-pattern>/jdbc</url-pattern>
-    </servlet-mapping>-->
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>home</welcome-file>
+    </welcome-file-list>
 </web-app>

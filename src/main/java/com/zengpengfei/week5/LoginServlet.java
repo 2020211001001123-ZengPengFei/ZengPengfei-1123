@@ -1,5 +1,8 @@
 package com.zengpengfei.week5;
 
+import com.zengpengfei.dao.UserDao;
+import com.zengpengfei.model.User;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -19,7 +22,8 @@ public class LoginServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        //doPost(request,response);
+        request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request,response);
 
     }
 
@@ -28,7 +32,23 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out=response.getWriter();
         String username=request.getParameter("username");
         String password=request.getParameter("password");
-        String sql="select username,password,email,gender,birthdate from usertable where username='"+username+"' and password='"+password+"'and email='\"+email+\"'and gender='\"+gender+\"'and birthdate='\"+birthdate+\"'";
+
+        UserDao userDao=new UserDao();
+        try {
+            User user = userDao.findByUsernamePassword(con,username,password);
+            if (user!=null){
+                request.setAttribute("user",user);
+                request.getRequestDispatcher("WEB-INF/views/userInfo").forward(request,response);
+            }else{
+                request.setAttribute("message","Username or Password Error!!!");
+                request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request,response);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        /*String sql="select username,password,email,gender,birthdate from usertable where username='"+username+"' and password='"+password+"'and email='\"+email+\"'and gender='\"+gender+\"'and birthdate='\"+birthdate+\"'";
         try{
             ResultSet rs =con.createStatement().executeQuery(sql);
             if(rs.next()){
@@ -51,7 +71,7 @@ public class LoginServlet extends HttpServlet {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }
+        }*/
 
     }
 }
