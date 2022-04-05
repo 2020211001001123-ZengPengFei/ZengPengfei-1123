@@ -6,16 +6,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>titile</title>
-</head>
-<body>
+<%@include file="header.jsp"%>
 <a href="http://www.ecjtu.jx.cn/">go to ecjtu</a>
-<form>
-    name:<input type="text" name="name"><br>
-    ID:<input type="text" name="ID"><br>
-    <input type="submit" value="send data to server"/>
+<form method="post" enctype="register">
+    Username:<input type="text" name="username"><br>
+    Password:<input type="password" name="password"><br>
+    Email:<input type="text" name="email"><br>
+
+    Gender:<input type="radio" name="gender" value="male">Male<input type="radio" name="gender" value="male">
+    Date of birth:<input type="text" name="birthdate"><br/>
+    <input type="submit" value="Register"/>
 </form>
-</body>
-</html>
+<%@include file="footer.jsp"%>
