@@ -9,15 +9,21 @@
 <%@include file="header.jsp"%>
 <h1>User Info</h1>
 <%
-    User user=(User)request.getAttribute("user");
+    Cookie[] allCookies=request.getCookies();
+    for(Cookie c:allCookies){
+        out.println("<br/>"+c.getName()+"---"+c.getValue());
+    }
+%>
+<%
+    User u=(User)session.getAttribute("user");
 %>
 <table>
     <tr>
-        <td>Username:</td><td><%=user.getUsername()%></td>
-        <td>Password:</td><td><%=user.getPassword()%></td>
-        <td>Email:</td><td><%=user.getEmail()%></td>
-        <td>Gender:</td><td><%=user.getGender()%></td>
-        <td>Birthdate:</td><td><%=user.getBithDate()%></td>
+        <td>Username:</td><td><%=u.getUsername()%></td>
+        <td>Password:</td><td><%=u.getPassword()%></td>
+        <td>Email:</td><td><%=u.getEmail()%></td>
+        <td>Gender:</td><td><%=u.getGender()%></td>
+        <td>Birthdate:</td><td><%=u.getBithDate()%></td>
 
     </tr>
 </table>

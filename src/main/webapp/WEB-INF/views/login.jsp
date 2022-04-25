@@ -13,9 +13,27 @@ if(!(request.getAttribute("message")==null)){
     out.println(request.getAttribute("message"));
     }
 %>
+<%
+    Cookie[] allCookies =request.getCookies();
+    String username="",password="",remeberMeVal="";
+    if(allCookies!=null){
+        for(Cookie c:allCookies){
+            if(c.getName().equals(("cUsername")){
+                username=c.getValue();
+            }
+            if(c.getName().equals(("cPassword")){
+                password=c.getValue();
+            }
+            if(c.getName().equals(("cRememberMe")){
+                remeberMeVal=c.getValue();
+            }
+        }
+    }
+%>
 <from method="post" action="login">
-    Username :<input type="text" name="username"><br/>
-    Password :<input type="password" name="password"><br/>
+    Username :<input type="text" name="username" value="<%=username%>"><br/>
+    Password :<input type="password" name="password" value="<%password%>"><br/>
+<input type="checkbox" name="rememberMe" value="1" <%=%>remeberMeVal.equals(1) ?checked:"" %>/>RememberMe<br/>
     <input type="submit" value="Submit"/>
 </from>
 <%@include file="footer.jsp"%>
