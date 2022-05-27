@@ -1,11 +1,11 @@
 package com.zengpengfei.dao;
 
 import com.dabing.model.Product;
+import com.zengpengfei.model.Product;
 
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDao implements  IProductDao{
@@ -19,7 +19,7 @@ public class ProductDao implements  IProductDao{
         if(product.getPicture()!=null) {
             //for sql server
             pt.setBinaryStream(3, product.getPicture());
-            //for mysql
+            //for mysql、
             //   pt.setBlob(3, product.getPicture());
         }
         pt.setDouble(4, product.getPrice());
@@ -55,6 +55,19 @@ public class ProductDao implements  IProductDao{
 
     @Override
     public List<Product> findByCategoryId(int categoryId, Connection con) {
+        ResultSet rs=pt.executeQuery ;
+        List<Product> list=new ArrayList<Product>();
+        String queryString ="select*from Product where categoryId=?";
+        pt.setint(1,categoryId);
+        while(rs.next(）{
+            Product product =new Product();
+            product.setProductId(rs.getInt("ProductId"));
+            product.setProductName(rs.getString("ProductName"));
+            product.setProductDescription(rs.getString("ProductDescription"));
+            product.setPrice(rs.getDouble("Price"));
+            product.setCategoryId(rs.getInt("CategoryID"));
+            List.add(product);
+        }
         return null;
     }
 
@@ -77,5 +90,17 @@ public class ProductDao implements  IProductDao{
     @Override
     public List<Product> getPicture(Integer productId, Connection con) throws SQLException {
         return null;
+    }
+    @Override
+    public byte[] getPictureBytd(Integer product,Connection con)throws SQLException{
+        byte[] imgBytes=null;
+        String sql="select picture from product where productId";
+        PreparedStatement pt=con.prepareStatement(sql);
+        pt.setInt(1,productId);
+        ResultSet rs=pt.executeQuery();
+        while(rs.next()){
+            Blob blob=rs.getBlob("picture");
+            imgBytes=blob.getBytes(1,(int)blob.length());
+        }
     }
 }
